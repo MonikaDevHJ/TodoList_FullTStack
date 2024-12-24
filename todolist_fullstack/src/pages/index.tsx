@@ -3,6 +3,8 @@ import { useState } from "react";
 export default function Home() {
   const [input, setInput] = useState<string>(""); // For the input field
   const [task, setTask] = useState<string[]>([]); // For the list of tasks
+  const [edit, setEdit] = useState<string>("");   //for the edit of task
+
 
   const handleTask = (): void => {
     // Prevent empty or whitespace-only tasks
@@ -14,6 +16,18 @@ export default function Home() {
     // Clear the input field
     setInput("");
   };
+
+  const handleEdit = (taskToEdit :string): void => {
+ 
+    // setEdit(setTask())
+  }
+
+  function handleDelete(t: string): void {
+    // Filter out the task that matches the one you want to delete (t)
+    const deleteTask = task.filter((taskItem) => taskItem !== t);
+    setTask(deleteTask);  // Update state with the new task list
+  }
+  
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100 p-4">
@@ -47,10 +61,16 @@ export default function Home() {
               >
                 <span>{t}</span>
                 <div className="flex space-x-2">
-                  <button className="text-blue-500 hover:text-blue-700">
+                
+                 
+                 
+                  <button onClick={()=>handleEdit(t)}
+                   className="text-blue-500 hover:text-blue-700">
                     Edit
                   </button>
-                  <button className="text-red-500 hover:text-red-700">
+                  
+                  <button onClick={()=>handleDelete(t)}
+                   className="text-red-500 hover:text-red-700">
                     Delete
                   </button>
                 </div>
